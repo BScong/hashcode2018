@@ -5,14 +5,14 @@ def dist(a,b,x,y):
 def find_best_ride(time, car_x, car_y):
     min_metric = math.inf
     min_ride = -1
-    for i in range(min(8*F,len(rides))):
+    for i in range(min(6*F,len(rides))):
         a,b,x,y,s,f,idx,d,c = rides[i]
         possible_metric = (f-time-d)
         dist_to_start = dist(car_x,car_y, a,b)
-        metric = dist_to_start*possible_metric*c
+        metric = dist_to_start*possible_metric*c*1000
         if s-time-dist_to_start>=0:
             metric = metric/B
-        if (possible_metric > 0 or (possible_metric == 0 and dist_to_start == 0)) and metric < min_metric:
+        if (possible_metric > 0 or (possible_metric == 0 and dist_to_start == 0)) and metric < min_metric and time+dist_to_start+d<f:
             min_metric=metric
             min_ride = i
 
